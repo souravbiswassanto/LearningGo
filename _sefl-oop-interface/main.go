@@ -28,10 +28,23 @@ func pnt(v demo) {
 type Us struct {
 }
 
+type Admin struct {
+	User
+	Level string
+}
+
 func main() {
 	d := &User{3}
 	e := &Us{}
 	fmt.Printf("%p\n", d)
 	pnt(d)
 	pnt(e)
+	admin := &Admin{
+		User: User{
+			3,
+		},
+	}
+
+	pnt(admin)
+
 }
