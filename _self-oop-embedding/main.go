@@ -26,6 +26,31 @@ type Person struct {
 	Address // embedding
 }
 
+// embedding again
+
+type Discount struct {
+	percent   float32
+	startTime uint64
+	endTime   uint64
+}
+
+func (d Discount) Calculate(originalPrice float32) float32 {
+	return originalPrice * d.percent
+}
+
+func (d *Discount) IsValid(currentTime uint64) bool {
+	return currentTime > d.startTime && currentTime < d.endTime
+}
+
+type PremiumDiscount struct {
+	Discount   //Embedded
+	additional float32
+}
+
+func (d *PremiumDiscount) Calculate(originalPrice float32) float32 {
+	return d.Discount.Calculate(originalPrice) - d.additional
+}
+
 func main() {
 	var x derived
 
